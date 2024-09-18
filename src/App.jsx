@@ -4,14 +4,18 @@ export default function App(){
   const [newItem, setNewItem] = useState("item 1")
   const [todos, setTodos] = useState([])
 
+  function handleSubmit(e){
+    e.preventDefault()
 
-  function handleSubmit(e) {e.preventDefault()
-
-    setTodos([...todos,{id: crypto.randomUUID(),title:newItem, completed: false},
-    ])
-
+    setTodos(currentTodos => {
+      [
+        ...currentTodos,
+        { id: crypto.randomUUID(),title: newItem,completed: false},
+      ]
+    })
+    setNewItem("")
   }
-  console.log(todos)
+
   return(
     <>
      <form onSubmit={handleSubmit} className="new-item-form">
@@ -27,33 +31,19 @@ export default function App(){
   </form>
   <h1 className="header">Todo List</h1>
   <ul className="list">
-    <li>
-      <label htmlFor="">
-        <input type="checkbox" />
+    {todos.map(todo => {
+      return(
+      <li key={todo.id}>
+      <label>
+        <input type="checkbox" checked={todo.completed} />
+        {todo.title}
         item1
       </label>
-      <button className="btn btn-danger">Delete</button>
-    </li>
-    <li>
-      <label >
-        <input type="checkbox" />
-        <button className></button>
-      </label>
-    </li>
-
-    <li>
-      <label>
-        <input type="checkbox" />
-        item2
-      </label>
-      <button className="btn btn-danger">Delete</button>
-    </li>
-    <li>
-      <label >
-        <input type="checkbox" />
-        <button className></button>
-      </label>
-    </li>
+      <button className="btn btn-danger">Delete</button>)
+      </li>
+      )
+    })}
+   
   </ul>
   </>
   )
