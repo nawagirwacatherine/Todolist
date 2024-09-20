@@ -7,12 +7,12 @@ export default function App(){
   function handleSubmit(e){
     e.preventDefault()
 
-    setTodos(currentTodos => {
+    setTodos(currentTodos => 
       [
         ...currentTodos,
-        { id: crypto.randomUUID(),title: newItem,completed: false},
+        { id: crypto.randomUUID(),title: newItem,completed: false}
       ]
-    })
+    );
     setNewItem("")
   }
 
